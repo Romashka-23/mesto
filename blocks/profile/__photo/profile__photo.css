@@ -1,0 +1,9 @@
+.profile__photo{
+    border-radius: 50%;
+    width: 127px;
+}
+@media (max-width: 720px){
+    .profile__photo{
+        margin-bottom: 40px;
+    }
+}

@@ -1,0 +1,25 @@
+.popup__button-exit{
+    position: absolute;
+    top: -38px;
+    right: -38px;
+    width: 47px;
+    height: 47px;
+    border: none;
+    border-radius: 50%;
+    background-image: url(../../../images/close.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 47px 47px;
+    background-color: rgba(0,0,0,0);
+}
+.popup__button-exit:hover{
+    opacity: 0.6;
+    transition: 0.5s ease;
+    cursor: pointer;
+ }
+@media (max-width: 500px) {
+    .popup__button-exit{
+        top: -47px;
+        right: 0px;
+    }
+}

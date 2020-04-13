@@ -1,0 +1,6 @@
+.element__title-container{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-self: center;
+    margin: 25px 15px 31px 21px;
+}

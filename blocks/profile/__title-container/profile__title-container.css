@@ -1,0 +1,11 @@
+.profile__title-container{
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: end;
+    margin-bottom: 16px;
+}
+@media (max-width: 720px){
+    .profile{
+        grid-template-columns: auto auto;
+    }
+}

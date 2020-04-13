@@ -1,0 +1,8 @@
+.profile__info-container{
+    margin-left: 42px;
+}
+@media (max-width: 720px) {
+    .profile__info-container{
+        margin-left: 0;
+    }
+}

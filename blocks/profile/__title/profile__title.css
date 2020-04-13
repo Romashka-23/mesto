@@ -1,0 +1,13 @@
+.profile__title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.625rem;
+    line-height: 0.8;
+    margin: 0 17px 0 0;
+}
+@media (max-width: 720px){
+    .profile__title{
+        font-size: 1.6876rem;
+        margin: 0 5px 0 0;
+    }
+}
