@@ -11,7 +11,7 @@
 <body>
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="images/Vector.svg" alt="Логотип Mesto">
+            <img class="header__logo" src="images/vector.svg" alt="Логотип Mesto">
         </header>
         <main class="content">
             <section class="profile">
@@ -19,11 +19,11 @@
                 <div class="profile__info-container">
                     <div class="profile__title-container">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button type="button" class="profile__edit-button"></button>
+                        <button type="button" aria-label="Изменить" class="profile__edit-button"></button>
                     </div>
                     <p class="profile__subtitle">Исследователь Океана</p>
                 </div>
-                <button type="button" class="profile__add-button"></button>
+                <button type="button" aria-label="Добавить" class="profile__add-button"></button>
             </section>
             <section class="elements">
                 <div class="element">
@@ -73,17 +73,17 @@
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
-        <div class="popup">
-            <form class="popup__container">
+        <section class="popup">
+            <form name="profile" method="post" action="#" class="popup__container">
                 <h2 class="popup__name">Редактировать профиль</h2>
-                <input type="text" class="popup__title">
-                <input type="text" class="popup__subtitle">
+                <input type="text" class="popup__text popup__text_title">
+                <input type="text" class="popup__text popup__text_subtitle">
                 <button type="submit" class="popup__button-save">Сохранить</button>
                 <button type="button" class="popup__button-exit"></button>
             </form>
-        </div>
+        </section>
     </div>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
