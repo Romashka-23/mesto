@@ -19,7 +19,10 @@
 }
 @media (max-width: 500px){
     .popup__button-exit{
-        top: -47px;
-        right: 0px;
+        width: 31px;
+        height: 31px;
+        background-size: 31px 31px;
+        top: -28px;
+        right: -28px;
     }
 }

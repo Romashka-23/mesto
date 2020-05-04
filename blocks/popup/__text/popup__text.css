@@ -13,7 +13,7 @@
 }
 @media (max-width: 500px){
     .popup__text{
-        width: 260px;
-        margin-left: 10px;
+        width: 200px;
+        margin-left: 20px;
     }
 }

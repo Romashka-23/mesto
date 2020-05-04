@@ -5,8 +5,13 @@
 @import url(./__text/popup__text.css);
 @import url(./__text/_title/popup__text_title.css);
 @import url(./__text/_subtitle/popup__text_subtitle.css);
+@import url(./__img-container/popup__img-container.css);
+@import url(./__big-image/popup__big-image.css);
+@import url(./__img-name/popup__img-name.css);
+
+
 .popup{
-    display: none;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -15,5 +20,8 @@
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s linear;
 }
 
