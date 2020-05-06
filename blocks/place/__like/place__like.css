@@ -1,4 +1,4 @@
-.element__like{
+.place__like{
     width: 21px;
     border: none;
     background-image: url(../../../images/like.svg);
@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     background-color: #ffffff;
 }
-.element__like:hover{
+.place__like:hover{
     opacity: 0.6;
     transition: 0.5s ease;
     cursor: pointer;

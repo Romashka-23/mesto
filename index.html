@@ -25,18 +25,18 @@
                 </div>
                 <button type="button" aria-label="Добавить" class="profile__add-button"></button>
             </section>
-            <section class="elements">
+            <ul class="place-list">
                 <template id="card">
-                    <div class="element">
-                        <button type="button" class="element__remove"></button>
-                        <img class="element__photo" src="" alt="">
-                        <div class="element__title-container">
-                            <h2 class="element__title"></h2>
-                            <button type="button" class="element__like"></button>
+                    <li class="place">
+                        <button type="button" class="place__remove"></button>
+                        <img class="place__photo" src="" alt="">
+                        <div class="place__title-container">
+                            <h2 class="place__title"></h2>
+                            <button type="button" class="place__like"></button>
                         </div>
-                    </div>
-                    </template>
-            </section>
+                    </li>
+                </template>
+            </ul>
         </main>
         <footer class="footer">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
@@ -53,8 +53,8 @@
         <section class="popup popup_cards">
             <form name="profile" method="post" action="#" class="popup__container">
                 <h2 class="popup__name">Новое место</h2>
-                <input type="text" class="popup__text popup__text_title" placeholder="Название">
-                <input type="text" class="popup__text popup__text_subtitle" placeholder="Ссылка на картинку">
+                <input type="text" required class="popup__text popup__text_title" placeholder="Название">
+                <input type="url" required class="popup__text popup__text_subtitle" placeholder="Ссылка на картинку">
                 <button type="submit" class="popup__button-save">Сохранить</button>
                 <button type="button" class="popup__button-exit"></button>
             </form>

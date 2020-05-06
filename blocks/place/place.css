@@ -1,0 +1,11 @@
+@import url(./__like/place__like.css);
+@import url(./__like/_active/place__like_active.css);
+@import url(./__remove/place__remove.css);
+@import url(./__photo/place__photo.css);
+@import url(./__title/place__title.css);
+@import url(./__title-container/place__title-container.css);
+.place{
+    border-radius: 10px;
+    background-color: #ffffff;
+    position: relative;
+}
