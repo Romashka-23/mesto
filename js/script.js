@@ -59,14 +59,26 @@ function likeButtonToggle(evt) {
 };
 // Функция удаления карточки
 function removeCard(evt) {
+    evt.target.closest('.place').querySelector('.place__like').removeEventListener('click', likeButtonToggle);
+    evt.target.closest('.place').querySelector('.place__remove').removeEventListener('click', removeCard);
+    evt.target.closest('.place').querySelector('.place__photo').removeEventListener('click', openPopupImg);
     evt.target.closest('.place').remove(); 
 };
+
+//Открытие попапа карточки 
+function openPopupImg(evt) {
+    imgPopup.src = evt.target.src;
+    imgPopup.alt = evt.target.alt;
+    imgName.textContent = evt.target.alt;
+    togglePopup(popupImg); 
+  }
 
 // Функция создания карточек
 function makeCard(item) {
     const element = elementTemplate.cloneNode(true); //создаем элемент
-    element.querySelector('.place__photo').src = item.link;
-    element.querySelector('.place__photo').alt = item.name;
+    const imagePopupButton = element.querySelector('.place__photo'); //находим картинку
+    imagePopupButton.src = item.link;
+    imagePopupButton.alt = item.name;
     element.querySelector('.place__title').textContent = item.name;
 
     const likeButton = element.querySelector('.place__like');
@@ -74,8 +86,7 @@ function makeCard(item) {
     
     const removeButton = element.querySelector('.place__remove');
     removeButton.addEventListener('click', removeCard); //удаление карточки
-    
-    const imagePopupButton = element.querySelector('.place__photo');
+        
     imagePopupButton.addEventListener('click', openPopupImg); //открытие попапа
 
     return element;
@@ -88,19 +99,12 @@ function addCard(item) {
 }
 
 // Открыть/закрыть попап
-function popupShow(item) {
+function togglePopup(item) {
         item.classList.toggle('popup_opened');
 }
-//Открытие попапа карточки 
-function openPopupImg(evt) {
-    imgPopup.src = evt.target.src;
-    imgPopup.alt = evt.target.alt;
-    imgName.textContent = evt.target.alt;
-    popupShow(popupImg); 
-  }
 
-//Изменить профиль
-function changeProfile() {
+//Изменить значения полей профиля
+function editValuesProfile() {
     popupTitle.value = profileTitle.textContent;
     popupSubtitle.value = profileSubtitle.textContent;
 };
@@ -110,31 +114,31 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     profileTitle.textContent = popupTitle.value;
     profileSubtitle.textContent = popupSubtitle.value;
-    popupShow(popup);
+    togglePopup(popup);
 }
 
 //Добавление карточки
 function formSubmitHandlerCard (evt) {
     evt.preventDefault();
         const objCard = {name: popupCardTitle.value, link: popupCardSubtitle.value};
-        initialCards.unshift(objCard);
         addCard(objCard);
         popupCardTitle.value = null;
         popupCardSubtitle.value = null;
-        popupShow(popupAddCard);
+        togglePopup(popupAddCard);
 }
 
 //События попапа добавления новой карточки
-addCardButton.addEventListener('click', function(){popupShow(popupAddCard)});
-exitCardButton.addEventListener('click', function(){popupShow(popupAddCard)});
+addCardButton.addEventListener('click', () => togglePopup(popupAddCard));
+exitCardButton.addEventListener('click', () => togglePopup(popupAddCard));
 formElementCard.addEventListener('submit', formSubmitHandlerCard);
 
 //События попапа профиля
 formElement.addEventListener('submit', formSubmitHandler);
-editButton.addEventListener('click', function(){popupShow(popup); changeProfile()});
-exitButton.addEventListener('click', function(){popupShow(popup)});
+editButton.addEventListener('click', () => {editValuesProfile(), togglePopup(popup)});
+exitButton.addEventListener('click', () => togglePopup(popup));
 
-exitPopupImg.addEventListener('click', function(){popupShow(popupImg)});
+//Событие попапа картинки
+exitPopupImg.addEventListener('click', () => togglePopup(popupImg));
 
 // добавляем карточки из массива при загрузке страницы
 initialCards.forEach(addCard);
