@@ -53,16 +53,14 @@ const imgPopup = document.querySelector('.popup__big-image');
 const imgName = document.querySelector('.popup__img-name');
 const exitPopupImg = document.querySelector('.popup__button-exit_img');
 
+// Открыть/закрыть попап
+function togglePopup(item) {
+    item.classList.toggle('popup_opened');
+}
+
 // Функция добавить-убрать лайк
 function likeButtonToggle(evt) {
     evt.target.classList.toggle('place__like_active');
-};
-// Функция удаления карточки
-function removeCard(evt) {
-    evt.target.closest('.place').querySelector('.place__like').removeEventListener('click', likeButtonToggle);
-    evt.target.closest('.place').querySelector('.place__remove').removeEventListener('click', removeCard);
-    evt.target.closest('.place').querySelector('.place__photo').removeEventListener('click', openPopupImg);
-    evt.target.closest('.place').remove(); 
 };
 
 //Открытие попапа карточки 
@@ -72,6 +70,15 @@ function openPopupImg(evt) {
     imgName.textContent = evt.target.alt;
     togglePopup(popupImg); 
   }
+
+// Функция удаления карточки
+function removeCard(evt) {
+    const removableСard = evt.target.closest('.place');
+    removableСard.querySelector('.place__like').removeEventListener('click', likeButtonToggle);
+    removableСard.querySelector('.place__remove').removeEventListener('click', removeCard);
+    removableСard.querySelector('.place__photo').removeEventListener('click', openPopupImg);
+    removableСard.remove(); 
+};
 
 // Функция создания карточек
 function makeCard(item) {
@@ -96,11 +103,6 @@ function makeCard(item) {
 function addCard(item) {
     const newCard = makeCard(item);
     elements.prepend(newCard); 
-}
-
-// Открыть/закрыть попап
-function togglePopup(item) {
-        item.classList.toggle('popup_opened');
 }
 
 //Изменить значения полей профиля
@@ -134,7 +136,7 @@ formElementCard.addEventListener('submit', formSubmitHandlerCard);
 
 //События попапа профиля
 formElement.addEventListener('submit', formSubmitHandler);
-editButton.addEventListener('click', () => {editValuesProfile(), togglePopup(popup)});
+editButton.addEventListener('click', () => {editValuesProfile(); togglePopup(popup)});
 exitButton.addEventListener('click', () => togglePopup(popup));
 
 //Событие попапа картинки
