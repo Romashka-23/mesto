@@ -53,10 +53,21 @@ const imgPopup = document.querySelector('.popup__big-image');
 const imgName = document.querySelector('.popup__img-name');
 const exitPopupImg = document.querySelector('.popup__button-exit_img');
 
+//Очистить ошибки
+function cleanErrors(item) {
+    const clError = item.querySelectorAll('.popup__input-error');
+    clError.forEach((Element) => {
+    Element.textContent = '';
+    Element.previousElementSibling.classList.remove('popup__text_error');
+    });
+};
+
 // Открыть/закрыть попап
 function togglePopup(item) {
+    cleanErrors(item);
     item.classList.toggle('popup_opened');
-}
+    disactiveButtonSave(item);
+};
 
 // Функция добавить-убрать лайк
 function likeButtonToggle(evt) {
@@ -69,7 +80,7 @@ function openPopupImg(evt) {
     imgPopup.alt = evt.target.alt;
     imgName.textContent = evt.target.alt;
     togglePopup(popupImg); 
-  }
+ };
 
 // Функция удаления карточки
 function removeCard(evt) {
@@ -103,7 +114,7 @@ function makeCard(item) {
 function addCard(item) {
     const newCard = makeCard(item);
     elements.prepend(newCard); 
-}
+};
 
 //Изменить значения полей профиля
 function editValuesProfile() {
@@ -117,7 +128,7 @@ function formSubmitHandler (evt) {
     profileTitle.textContent = popupTitle.value;
     profileSubtitle.textContent = popupSubtitle.value;
     togglePopup(popup);
-}
+};
 
 //Добавление карточки
 function formSubmitHandlerCard (evt) {
@@ -127,7 +138,22 @@ function formSubmitHandlerCard (evt) {
         popupCardTitle.value = null;
         popupCardSubtitle.value = null;
         togglePopup(popupAddCard);
-}
+};
+
+// Функция закрытия попап при нажатии Esc
+function closePopupIfEsc () {
+    const searchPopupList = document.querySelectorAll('.popup');
+    searchPopupList.forEach((formElement) => {
+      formElement.classList.remove('popup_opened');
+      });
+    };
+    
+// Закрытие попап кликом на оверлей
+function overlayClose(event) { 
+    if (event.target.classList.contains('popup_opened')) { 
+        togglePopup(event.target); 
+    } 
+  }
 
 //События попапа добавления новой карточки
 addCardButton.addEventListener('click', () => togglePopup(popupAddCard));
@@ -144,4 +170,12 @@ exitPopupImg.addEventListener('click', () => togglePopup(popupImg));
 
 // добавляем карточки из массива при загрузке страницы
 initialCards.forEach(addCard);
+  
+// Слушатель клавиатуры
+document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      closePopupIfEsc();
+    }
+  });
 
+document.addEventListener('click', overlayClose);
