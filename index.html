@@ -44,9 +44,9 @@
         <section class="popup popup_profile">
             <form name="profile" method="post" action="#" class="popup__container" novalidate>
                 <h2 class="popup__name">Редактировать профиль</h2>
-                <input id="name" type="text" class="popup__text popup__text_title" pattern="^[a-zA-Zа-яА-ЯёЁ\s-]{2,40}$">
+                <input id="name" type="text" class="popup__text popup__text_title" pattern="[a-zA-Zа-яА-Я\s\-]+" required minlength="2" maxlength="40">
                 <span id="name-error" class="popup__input-error"></span>
-                <input id="about" type="text" class="popup__text popup__text_subtitle" required pattern="^.{2,200}$">
+                <input id="about" type="text" class="popup__text popup__text_subtitle" required minlength="2" maxlength="200">
                 <span id="about-error" class="popup__input-error"></span>
                 <button type="submit" class="popup__button-save">Сохранить</button>
                 <button type="button" class="popup__button-exit"></button>
@@ -55,9 +55,9 @@
         <section class="popup popup_cards">
             <form name="profile" method="post" action="#" class="popup__container" novalidate>
                 <h2 class="popup__name">Новое место</h2>
-                <input id="title" type="text" required class="popup__text popup__text_title" placeholder="Название" pattern="^.{1,30}$">
+                <input id="title" type="text" required class="popup__text popup__text_title" placeholder="Название" value="" required minlength="1" maxlength="30">
                 <span id="title-error" class="popup__input-error"></span>
-                <input id="link" type="url" required class="popup__text popup__text_subtitle" placeholder="Ссылка на картинку" pattern="^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$">
+                <input id="link" type="url" required class="popup__text popup__text_subtitle" placeholder="Ссылка на картинку" value="" required>
                 <span id="link-error" class="popup__input-error"></span>
                 <button type="submit" class="popup__button-save">Сохранить</button>
                 <button type="button" class="popup__button-exit"></button>
@@ -73,6 +73,7 @@
     </div>
     <script src="js/script.js"></script>
     <script src="js/validate.js"></script>
+    
 </body>
 
 </html>

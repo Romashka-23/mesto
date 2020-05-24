@@ -53,20 +53,26 @@ const imgPopup = document.querySelector('.popup__big-image');
 const imgName = document.querySelector('.popup__img-name');
 const exitPopupImg = document.querySelector('.popup__button-exit_img');
 
+
 //Очистить ошибки
 function cleanErrors(item) {
     const clError = item.querySelectorAll('.popup__input-error');
     clError.forEach((Element) => {
-    Element.textContent = '';
-    Element.previousElementSibling.classList.remove('popup__text_error');
+    hideInputError(item, Element.previousElementSibling,'.popup__input-error_active');
     });
 };
 
 // Открыть/закрыть попап
 function togglePopup(item) {
     cleanErrors(item);
+    toggleEventListeners(item);
     item.classList.toggle('popup_opened');
-    disactiveButtonSave(item);
+    console.log(item.classList.contains('popup_cards'));
+     if (item.classList.contains('popup_cards')){
+        const inputs = Array.from(item.querySelectorAll('.popup__text'));
+        inputs.forEach((inputElement) => {
+        inputElement.value = "";
+    })};
 };
 
 // Функция добавить-убрать лайк
@@ -154,6 +160,28 @@ function overlayClose(event) {
         togglePopup(event.target); 
     } 
   }
+// Функция устанавки / снятия слушатели Esc и Overlay
+function toggleEventListeners (popupElement) {
+    if (!popupElement.classList.contains('popup_opened')) {
+      // Устанавливаем слушатель Esc
+      document.addEventListener('keydown', function (evt) {
+        if (evt.key === 'Escape') {
+          closePopupIfEsc();
+        }
+      });
+      // Устанавливаем слушатель Оверлэй
+      document.addEventListener('click', overlayClose);
+    } else {
+      // Снятие слушателя Esc
+      document.removeEventListener('keydown', function (evt) {
+        if (evt.key === 'Escape') {
+          closePopupIfEsc();
+        }
+      });
+      // Снятие слушателя Оверлей
+      document.removeEventListener('click', overlayClose);
+    }
+  }
 
 //События попапа добавления новой карточки
 addCardButton.addEventListener('click', () => togglePopup(popupAddCard));
@@ -170,12 +198,3 @@ exitPopupImg.addEventListener('click', () => togglePopup(popupImg));
 
 // добавляем карточки из массива при загрузке страницы
 initialCards.forEach(addCard);
-  
-// Слушатель клавиатуры
-document.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Escape') {
-      closePopupIfEsc();
-    }
-  });
-
-document.addEventListener('click', overlayClose);
