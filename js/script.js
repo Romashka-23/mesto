@@ -55,25 +55,47 @@ const exitPopupImg = document.querySelector('.popup__button-exit_img');
 
 
 //Очистить ошибки
-function cleanErrors(item) {
-    const clError = item.querySelectorAll('.popup__input-error');
-    clError.forEach((Element) => {
-    hideInputError(item, Element.previousElementSibling,'.popup__input-error_active');
+function cleanErrors(popupWindow) {
+    const inputsWithError = popupWindow.querySelectorAll('.popup__text');
+    inputsWithError.forEach((Element) => {
+    const obj = {inputErrorClass: 'popup__text_error',
+    errorClass: 'popup__input-error_active'};
+    hideInputError(popupWindow, Element, obj);
     });
 };
 
-// Открыть/закрыть попап
-function togglePopup(item) {
-    cleanErrors(item);
-    toggleEventListeners(item);
-    item.classList.toggle('popup_opened');
-    console.log(item.classList.contains('popup_cards'));
-     if (item.classList.contains('popup_cards')){
+//Чистим инпуты
+function cleanPopupInputs(item) {
+    if (item.classList.contains('popup_cards')){
         const inputs = Array.from(item.querySelectorAll('.popup__text'));
         inputs.forEach((inputElement) => {
         inputElement.value = "";
-    })};
-};
+    });
+}
+}
+
+//Переключатель класса попапа
+function popupClassToggle(item){
+    item.classList.toggle('popup_opened');
+}
+//Открытие popup 
+function openPopup(item){
+    // Устанавливаем слушатель Esc
+    document.addEventListener('keydown', escClose);
+    // Устанавливаем слушатель Оверлэй
+    document.addEventListener('mousedown', overlayClose);
+    popupClassToggle(item);
+}
+//Закрыть popup 
+function closePopup(item){
+    cleanErrors(item);
+    // Снятие слушателя Esc
+    document.removeEventListener('keydown', escClose);
+    // Снятие слушателя Оверлей
+    document.removeEventListener('mousedown', overlayClose);
+    popupClassToggle(item);
+    cleanPopupInputs(item);  
+}
 
 // Функция добавить-убрать лайк
 function likeButtonToggle(evt) {
@@ -85,7 +107,7 @@ function openPopupImg(evt) {
     imgPopup.src = evt.target.src;
     imgPopup.alt = evt.target.alt;
     imgName.textContent = evt.target.alt;
-    togglePopup(popupImg); 
+    openPopup(popupImg); 
  };
 
 // Функция удаления карточки
@@ -133,7 +155,7 @@ function formSubmitHandler (evt) {
     evt.preventDefault();
     profileTitle.textContent = popupTitle.value;
     profileSubtitle.textContent = popupSubtitle.value;
-    togglePopup(popup);
+    closePopup(popup);
 };
 
 //Добавление карточки
@@ -143,58 +165,40 @@ function formSubmitHandlerCard (evt) {
         addCard(objCard);
         popupCardTitle.value = null;
         popupCardSubtitle.value = null;
-        togglePopup(popupAddCard);
+        closePopup(popupAddCard);
 };
 
 // Функция закрытия попап при нажатии Esc
 function closePopupIfEsc () {
-    const searchPopupList = document.querySelectorAll('.popup');
-    searchPopupList.forEach((formElement) => {
-      formElement.classList.remove('popup_opened');
-      });
-    };
+    const searchOpenPopup = document.querySelector('.popup_opened');
+    closePopup(searchOpenPopup);
+};
     
 // Закрытие попап кликом на оверлей
 function overlayClose(event) { 
     if (event.target.classList.contains('popup_opened')) { 
-        togglePopup(event.target); 
+        closePopup(event.target); 
     } 
   }
-// Функция устанавки / снятия слушатели Esc и Overlay
-function toggleEventListeners (popupElement) {
-    if (!popupElement.classList.contains('popup_opened')) {
-      // Устанавливаем слушатель Esc
-      document.addEventListener('keydown', function (evt) {
-        if (evt.key === 'Escape') {
-          closePopupIfEsc();
-        }
-      });
-      // Устанавливаем слушатель Оверлэй
-      document.addEventListener('click', overlayClose);
-    } else {
-      // Снятие слушателя Esc
-      document.removeEventListener('keydown', function (evt) {
-        if (evt.key === 'Escape') {
-          closePopupIfEsc();
-        }
-      });
-      // Снятие слушателя Оверлей
-      document.removeEventListener('click', overlayClose);
+// закрытие попап клавишей Esc
+function escClose(event){
+    if (event.key === 'Escape') {
+      closePopupIfEsc();
     }
-  }
+};
 
 //События попапа добавления новой карточки
-addCardButton.addEventListener('click', () => togglePopup(popupAddCard));
-exitCardButton.addEventListener('click', () => togglePopup(popupAddCard));
+addCardButton.addEventListener('click', () => openPopup(popupAddCard));
+exitCardButton.addEventListener('click', () => closePopup(popupAddCard));
 formElementCard.addEventListener('submit', formSubmitHandlerCard);
 
 //События попапа профиля
 formElement.addEventListener('submit', formSubmitHandler);
-editButton.addEventListener('click', () => {editValuesProfile(); togglePopup(popup)});
-exitButton.addEventListener('click', () => togglePopup(popup));
+editButton.addEventListener('click', () => {editValuesProfile(); openPopup(popup)});
+exitButton.addEventListener('click', () => closePopup(popup));
 
 //Событие попапа картинки
-exitPopupImg.addEventListener('click', () => togglePopup(popupImg));
+exitPopupImg.addEventListener('click', () => closePopup(popupImg));
 
 // добавляем карточки из массива при загрузке страницы
 initialCards.forEach(addCard);

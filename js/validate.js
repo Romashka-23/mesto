@@ -6,10 +6,10 @@ const showInputError = (formElement, inputElement, errorMessage, {inputErrorClas
   errorElement.classList.add(errorClass);
 };
 
-const hideInputError = (formElement, inputElement, {errorClass}) => {
+const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}) => {
   // Находим элемент ошибки
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove('popup__text_error');
+  inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 };
@@ -22,7 +22,7 @@ const hideInputError = (formElement, inputElement, {errorClass}) => {
   } else {
     // hideInputError теперь получает в параметром форму, в которой
     // находится проверяемое поле, и само это поле
-    hideInputError(formElement, inputElement, newData); 
+    hideInputError(formElement, inputElement, newData);
   }
 };
 //обход инпутов
@@ -41,11 +41,11 @@ const toggleButtonState = (inputList, buttonElement, {activeButtonClass}) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.classList.add(activeButtonClass);
-    buttonElement.setAttribute("disabled", "disabled"); 
+    buttonElement.setAttribute('disabled', true); 
   } else {
         // иначе сделай кнопку активной
     buttonElement.classList.remove(activeButtonClass);
-    buttonElement.removeAttribute("disabled", "disabled");
+    buttonElement.removeAttribute('disabled');
   }
 };
 
