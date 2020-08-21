@@ -1,4 +1,4 @@
-import { escClose, overlayClose} from './script.js';
+import { escClose, overlayClose} from './Utils.js';
 
 //Класс Card
 export class Card{

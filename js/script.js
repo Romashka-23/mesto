@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
+import { escClose, overlayClose} from './Utils.js';
 
 // Карточки из коробки
 const initialCards = [
@@ -146,19 +147,6 @@ function formSubmitHandlerCard (evt) {
 function closePopupIfEsc () {
     const searchOpenPopup = document.querySelector('.popup_opened');
     closePopup(searchOpenPopup);
-};
-    
-// Закрытие попап кликом на оверлей
-export const overlayClose = (event) => { 
-    if (event.target.classList.contains('popup_opened')) { 
-        closePopup(event.target); 
-    } 
-  }
-// закрытие попап клавишей Esc
-export const escClose = (event) => {
-    if (event.key === 'Escape') {
-      closePopupIfEsc();
-    }
 };
 
 //События попапа добавления новой карточки
