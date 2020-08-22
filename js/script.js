@@ -1,6 +1,6 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { escClose, overlayClose} from './Utils.js';
+import { escClose, overlayClose, closePopup, popupClassToggle} from './Utils.js';
 
 // Карточки из коробки
 const initialCards = [
@@ -77,7 +77,6 @@ function cleanErrorAddcard() {
     addCardFormValidator.resetValidationErrors();
 };
 
-
 //Чистим инпуты
 function cleanPopupInputs(item) {
     if (item.classList.contains('popup_cards')){
@@ -88,13 +87,8 @@ function cleanPopupInputs(item) {
 }
 }
 
-//Переключатель класса попапа
-function popupClassToggle(item){
-    item.classList.toggle('popup_opened');
-}
 //Открытие popup 
 function openPopup(popupWindow){
-    //cleanErrors(popupWindow);
     cleanPopupInputs(popupWindow);
     // Устанавливаем слушатель Esc
     document.addEventListener('keydown', escClose);
@@ -102,15 +96,6 @@ function openPopup(popupWindow){
     document.addEventListener('mousedown', overlayClose);
     popupClassToggle(popupWindow);
 }
-//Закрыть popup 
-function closePopup(popupWindow){
-    // Снятие слушателя Esc
-    document.removeEventListener('keydown', escClose);
-    // Снятие слушателя Оверлей
-    document.removeEventListener('mousedown', overlayClose);
-    popupClassToggle(popupWindow);
-}
-
 
 //Функция добавления карточки
 function addCard(item) {
@@ -141,12 +126,6 @@ function formSubmitHandlerCard (evt) {
         popupCardTitle.value = null;
         popupCardSubtitle.value = null;
         closePopup(popupAddCard);
-};
-
-// Функция закрытия попап при нажатии Esc
-function closePopupIfEsc () {
-    const searchOpenPopup = document.querySelector('.popup_opened');
-    closePopup(searchOpenPopup);
 };
 
 //События попапа добавления новой карточки

@@ -43,7 +43,6 @@ export class Card{
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
-        
         this._element.querySelector('.place__photo').src = this._image;
         this._element.querySelector('.place__photo').alt = this._text;
         this._element.querySelector('.place__title').textContent = this._text;      

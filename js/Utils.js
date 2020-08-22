@@ -10,3 +10,22 @@ export const escClose = (event) => {
       closePopupIfEsc();
     }
 };
+
+// // Функция закрытия попап при нажатии Esc
+const closePopupIfEsc = () =>{
+    const searchOpenPopup = document.querySelector('.popup_opened');
+    closePopup(searchOpenPopup);
+};
+
+export const closePopup = (popupWindow) => {
+      // Снятие слушателя Esc
+      document.removeEventListener('keydown', escClose);
+      // Снятие слушателя Оверлей
+      document.removeEventListener('mousedown', overlayClose);
+      popupClassToggle(popupWindow);
+  }
+
+//Переключатель класса попапа
+export const popupClassToggle = (item) => {
+    item.classList.toggle('popup_opened');
+}
