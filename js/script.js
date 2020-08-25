@@ -1,10 +1,10 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { closePopup, openPopup} from './utils.js';
 import {initialCards, parameters, popup, editButton, profileTitle, profileSubtitle,
     popupTitle, popupSubtitle, exitButton, formElement, popupAddCard,
     addCardButton, popupCardTitle, popupCardSubtitle, exitCardButton,
     formElementCard, elements, popupImg, exitPopupImg} from './constants.js';
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+import { closePopup, openPopup} from './utils.js';
 
 //Функции очистки ошибок
 function  cleanErrorEditform() {

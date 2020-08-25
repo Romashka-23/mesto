@@ -23,8 +23,7 @@ export const closePopup = (popupWindow) => {
       // Снятие слушателя Оверлей
       document.removeEventListener('mousedown', overlayClose);
       popupWindow.classList.remove('popup_opened');
-      //popupClassToggle(popupWindow);
-  }
+};
 
 //Открытие popup 
 export const openPopup = (popupWindow) => {
@@ -33,6 +32,5 @@ export const openPopup = (popupWindow) => {
     // Устанавливаем слушатель Оверлэй
     document.addEventListener('mousedown', overlayClose);
     popupWindow.classList.add('popup_opened');
-    //popupClassToggle(popupWindow);
-}
+};
 
