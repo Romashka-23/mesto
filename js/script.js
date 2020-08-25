@@ -4,7 +4,7 @@ import {initialCards, parameters, popup, editButton, profileTitle, profileSubtit
     formElementCard, elements, popupImg, exitPopupImg} from './constants.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { closePopup, openPopup} from './utils.js';
+import { closePopup, openPopup} from './utilits.js';
 
 //Функции очистки ошибок
 function  cleanErrorEditform() {

@@ -1,4 +1,4 @@
-import {openPopup} from './utils.js';
+import {openPopup} from './utilits.js';
 import {popupImg} from './constants.js';
 //Класс Card
 export class Card{
