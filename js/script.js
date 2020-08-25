@@ -1,72 +1,10 @@
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { escClose, overlayClose, closePopup, popupClassToggle} from './Utils.js';
-
-// Карточки из коробки
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинск',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорск',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
-
-const parameters = {
-    formSelector: '.popup__container',
-    inputSelector: '.popup__text',
-    inputErrorClass: 'popup__text_error',
-    errorClass: 'popup__input-error_active',
-    submitButtonSelector: '.popup__button-save',
-    activeButtonClass: 'popup__button-save_disactive'
-  };
-  
-
-//Константы и переменные попапа профиля
-const popup = document.querySelector('.popup_profile');
-const editButton = document.querySelector('.profile__edit-button');
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-const popupTitle = document.querySelector('.popup__text_title');
-const popupSubtitle = document.querySelector('.popup__text_subtitle');
-const exitButton = document.querySelector('.popup__button-exit');
-const formElement = document.querySelector('.popup__container');
-
-//Попап добавления карточки
-const popupAddCard = document.querySelector('.popup_cards');
-const addCardButton = document.querySelector('.profile__add-button');
-const popupCardTitle = popupAddCard.querySelector('.popup__text_title');
-const popupCardSubtitle = popupAddCard.querySelector('.popup__text_subtitle');
-const exitCardButton = popupAddCard.querySelector('.popup__button-exit');
-const formElementCard = popupAddCard.querySelector('.popup__container');
-
-//Список элементов для добавления
-const elements = document.querySelector('.place-list'); 
-
-//Попап  картинки
-const popupImg = document.querySelector('.popup_img')
-const imgPopup = document.querySelector('.popup__big-image');
-const imgName = document.querySelector('.popup__img-name');
-const exitPopupImg = document.querySelector('.popup__button-exit_img');
-
+import { closePopup, openPopup} from './utils.js';
+import {initialCards, parameters, popup, editButton, profileTitle, profileSubtitle,
+    popupTitle, popupSubtitle, exitButton, formElement, popupAddCard,
+    addCardButton, popupCardTitle, popupCardSubtitle, exitCardButton,
+    formElementCard, elements, popupImg, exitPopupImg} from './constants.js';
 
 //Функции очистки ошибок
 function  cleanErrorEditform() {
@@ -85,16 +23,6 @@ function cleanPopupInputs(item) {
         inputElement.value = "";
     });
 }
-}
-
-//Открытие popup 
-function openPopup(popupWindow){
-    cleanPopupInputs(popupWindow);
-    // Устанавливаем слушатель Esc
-    document.addEventListener('keydown', escClose);
-    // Устанавливаем слушатель Оверлэй
-    document.addEventListener('mousedown', overlayClose);
-    popupClassToggle(popupWindow);
 }
 
 //Функция добавления карточки
@@ -129,7 +57,7 @@ function formSubmitHandlerCard (evt) {
 };
 
 //События попапа добавления новой карточки
-addCardButton.addEventListener('click', () => {cleanErrorAddcard(); openPopup(popupAddCard); });
+addCardButton.addEventListener('click', () => {cleanErrorAddcard(); cleanPopupInputs(popupAddCard); openPopup(popupAddCard); });
 exitCardButton.addEventListener('click', () => closePopup(popupAddCard));
 formElementCard.addEventListener('submit', formSubmitHandlerCard);
 

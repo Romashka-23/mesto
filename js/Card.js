@@ -1,5 +1,5 @@
-import { escClose, overlayClose} from './Utils.js';
-
+import {openPopup} from './utils.js';
+import {popupImg} from './constants.js';
 //Класс Card
 export class Card{
     constructor(data){
@@ -24,27 +24,26 @@ export class Card{
     }
     //Приватный метод удаление карточки и слушателей
     _removeCard() {
-        this._element.querySelector('.place__like').removeEventListener('click', () => {this._likeButtonToggle();});
-        this._element.querySelector('.place__remove').removeEventListener('click', () =>{this._removeCard();});
-        this._element.querySelector('.place__photo').removeEventListener('click', () => {this._openPopupImg();});
         this._element.remove(); 
+        this._element = null;
     }
     
     //Открытие попапа карточки 
     _openPopupImg() {
-    document.querySelector('.popup__big-image').src = this._image;
-    document.querySelector('.popup__big-image').alt = this._text;
+        const bigImage = document.querySelector('.popup__big-image');
+        bigImage.src = this._image;
+        bigImage.alt = this._text;
     document.querySelector('.popup__img-name').textContent = this._text;
-    document.addEventListener('keydown', escClose);
-    document.addEventListener('mousedown', overlayClose);
-    document.querySelector('.popup_img').classList.toggle('popup_opened');
+    openPopup(popupImg);
+    
      };
              
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
-        this._element.querySelector('.place__photo').src = this._image;
-        this._element.querySelector('.place__photo').alt = this._text;
+        const placePhoto = this._element.querySelector('.place__photo');
+        placePhoto.src = this._image;
+        placePhoto.alt = this._text;
         this._element.querySelector('.place__title').textContent = this._text;      
 
         return this._element;

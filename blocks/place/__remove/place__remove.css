@@ -8,7 +8,8 @@
     background-image: url(../../../images/remove.svg);
     background-position: center center;
     background-repeat: no-repeat;
-    background-color: rgba(0, 0, 0, 0);;
+    background-color: rgba(0, 0, 0, 0);
+    
 }
 .place__remove:hover{
     opacity: 0.6;

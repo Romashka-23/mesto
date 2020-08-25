@@ -1,11 +1,11 @@
 // Закрытие попап кликом на оверлей
-export const overlayClose = (event) => { 
+const overlayClose = (event) => { 
     if (event.target.classList.contains('popup_opened')) { 
         closePopup(event.target); 
     } 
   }
 // закрытие попап клавишей Esc
-export const escClose = (event) => {
+const escClose = (event) => {
     if (event.key === 'Escape') {
       closePopupIfEsc();
     }
@@ -22,10 +22,17 @@ export const closePopup = (popupWindow) => {
       document.removeEventListener('keydown', escClose);
       // Снятие слушателя Оверлей
       document.removeEventListener('mousedown', overlayClose);
-      popupClassToggle(popupWindow);
+      popupWindow.classList.remove('popup_opened');
+      //popupClassToggle(popupWindow);
   }
 
-//Переключатель класса попапа
-export const popupClassToggle = (item) => {
-    item.classList.toggle('popup_opened');
+//Открытие popup 
+export const openPopup = (popupWindow) => {
+    // Устанавливаем слушатель Esc
+    document.addEventListener('keydown', escClose);
+    // Устанавливаем слушатель Оверлэй
+    document.addEventListener('mousedown', overlayClose);
+    popupWindow.classList.add('popup_opened');
+    //popupClassToggle(popupWindow);
 }
+
